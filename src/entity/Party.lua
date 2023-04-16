@@ -32,7 +32,7 @@ function Party:init(def)
             attackIV = characterInfo.properties.attackIV,
             defenseIV = characterInfo.properties.defenseIV,
             magicIV = characterInfo.properties.magicIV,
-            level = characterInfo.properties.level,
+            restTime = characterInfo.properties.restTime,
             direction = 'down',
             mapX = x,
             mapY = y,

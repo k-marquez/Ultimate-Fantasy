@@ -4,6 +4,12 @@
 
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
+
+    Modified by: Kevin Márquez
+    marquezberriosk@gmail.com
+
+    Modified by: Lewis Ochoa
+    
 ]]
 BattleState = Class{__includes = BaseState}
 
@@ -97,7 +103,8 @@ function BattleState:createEnemies()
             baseDefense = enemyInfo.baseDefense,
             baseMagic = enemyInfo.baseMagic,
             statusGenerated = enemyInfo.statusGenerated,
-            animations = enemyInfo.animations
+            animations = enemyInfo.animations,
+            restTime = math.random(2,3)
         })
         enemy.stateMachine = StateMachine {
             ['battle'] = function() return EnemyBattleState(enemy) end
@@ -125,7 +132,8 @@ function BattleState:createEnemies()
                 baseDefense = enemyInfo.baseDefense,
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
-                animations = enemyInfo.animations
+                animations = enemyInfo.animations,
+                restTime = math.random(4,6)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end
@@ -156,7 +164,8 @@ function BattleState:createEnemies()
                 baseDefense = enemyInfo.baseDefense,
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
-                animations = enemyInfo.animations
+                animations = enemyInfo.animations,
+                restTime = math.random(4,5)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end
@@ -246,7 +255,7 @@ function BattleState:triggerStartingDialogue()
     
     -- callback for when the battle message is closed
     function()
-        names = ''
+        local names = ''
         for k, c in pairs(self.party.characters) do
             if not c.dead then
                 names = names .. c.name .. ', '

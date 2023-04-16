@@ -30,6 +30,21 @@ function BattleEntity:init(def)
     self.magic = self.baseMagic
     
     self.currentHP = self.HP
+
+    self.restTime = def.restTime
+    self.elapsedRestTime = 0
+    print(self.class, self.restTime)
+end
+
+function BattleEntity:updateElapsedRestTime(dt)
+    self.elapsedRestTime = self.elapsedRestTime - dt
+    if self.elapsedRestTime <= 0 then
+        self.elapsedRestTime = self.restTime
+    end
+end
+
+function BattleEntity:canAttack()
+    return self.elapsedRestTime > 0
 end
 
 function BattleEntity:damage(amount)
