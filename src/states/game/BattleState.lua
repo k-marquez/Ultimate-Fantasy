@@ -9,7 +9,6 @@
     marquezberriosk@gmail.com
 
     Modified by: Lewis Ochoa
-    
 ]]
 BattleState = Class{__includes = BaseState}
 
@@ -104,7 +103,7 @@ function BattleState:createEnemies()
             baseMagic = enemyInfo.baseMagic,
             statusGenerated = enemyInfo.statusGenerated,
             animations = enemyInfo.animations,
-            restTime = math.random(2,3)
+            restTime = math.random(2,10)
         })
         enemy.stateMachine = StateMachine {
             ['battle'] = function() return EnemyBattleState(enemy) end
@@ -133,7 +132,7 @@ function BattleState:createEnemies()
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
                 animations = enemyInfo.animations,
-                restTime = math.random(4,6)
+                restTime = math.random(4,10)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end
@@ -165,7 +164,7 @@ function BattleState:createEnemies()
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
                 animations = enemyInfo.animations,
-                restTime = math.random(4,5)
+                restTime = math.random(2,10)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end

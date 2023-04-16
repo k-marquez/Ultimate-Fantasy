@@ -20,11 +20,96 @@ end
 function TakeTurnState:update(dt)
     for k, e in pairs(self.enemies) do
         e:update(dt)
+        e:updateElapsedRestTime(dt)
     end
+
+    for k, c in pairs(self.party.characters) do
+        if not c.dead then
+            c:updateElapsedRestTime(dt)
+        end
+    end
+
+    self:takeTurn()
 end
 
 function TakeTurnState:enter(params)
-    self:takePartyTurn(1)
+    -- self:takePartyTurn(1)
+    self:takeTurn()
+end
+
+function TakeTurnState:takeTurn()
+    for k, c in pairs(self.characters) do
+        if c.canAttack then
+            c.canAttack = false
+            stateStack:push(BattleMessageState(self.battleState, 'Turn for ' .. c.name .. '! Select an action.',
+            -- callback for when the battle message is closed
+            function()
+                stateStack:push(SelectActionState(self.battleState, c,
+                
+                -- callback for when the action has been selected
+                function()
+                    if self:checkAllDeath(self.enemies) then
+                        self:victory()
+                    end
+                end))
+            end))
+        end
+    end
+
+    for k, e in pairs(self.enemies) do
+        if e.canAttack then
+            e.canAttack = false
+            self.enemyAttacksInARow = self.enemyAttacksInARow + 1
+
+            local message = ''
+
+            -- choose a randoms action
+            local action = e.actions[math.random(#e.actions)]
+
+            local targets = action.target_type == 'enemy' and self.characters or self.enemies
+
+            if action.require_target then
+                local target_p = math.random(#targets)
+
+                while targets[target_p].dead do
+                    target_p = math.random(#targets)
+                end
+
+                local target = targets[target_p]
+
+                local amount = action.func(e, target)
+
+                SOUNDS[action.sound_effect]:stop()
+                SOUNDS[action.sound_effect]:play()
+
+                Timer.tween(0.5, {
+                    [self.battleState.energyBars[target.name]] = {value = target.currentHP}
+                })
+
+                message = e.name .. ' used ' .. action.name .. ' for '.. amount .. ' HP on ' .. target.name .. '.'
+            else
+                local amount = action.func(e, targets)
+
+                SOUNDS[action.sound_effect]:stop()
+                SOUNDS[action.sound_effect]:play()
+
+                local targetName = action.target_type == 'enemy' and 'you' or 'them'
+
+                message = e.name .. ' used ' .. action.name .. ' for ' .. amount .. ' HP on all of ' .. targetName .. '.'
+            end
+
+            local gameOver = self:checkAllDeath(self.characters)
+
+            if gameOver then
+                self:faint()
+            else
+                stateStack:push(BattleMessageState(self.battleState, message,
+                    -- callback for when the battle message is closed
+                    function() end)
+                )
+            end
+        end
+    end
 end
 
 function TakeTurnState:takePartyTurn(i)

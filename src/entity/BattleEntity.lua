@@ -33,18 +33,16 @@ function BattleEntity:init(def)
 
     self.restTime = def.restTime
     self.elapsedRestTime = 0
-    print(self.class, self.restTime)
+    self.canAttack = false
 end
 
 function BattleEntity:updateElapsedRestTime(dt)
     self.elapsedRestTime = self.elapsedRestTime - dt
+    print(self.class, self.elapsedRestTime)
     if self.elapsedRestTime <= 0 then
         self.elapsedRestTime = self.restTime
+        self.canAttack = true
     end
-end
-
-function BattleEntity:canAttack()
-    return self.elapsedRestTime > 0
 end
 
 function BattleEntity:damage(amount)
