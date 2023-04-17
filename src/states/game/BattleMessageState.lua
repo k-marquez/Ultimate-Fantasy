@@ -12,7 +12,7 @@ BattleMessageState = Class{__includes = BaseState}
 function BattleMessageState:init(battleState, msg, onClose, canInput)
     self.classType = 'BattleMessageState'
     self.battleState = battleState
-    self.textbox = Textbox(0, VIRTUAL_HEIGHT - 64, VIRTUAL_WIDTH, 64, msg, FONTS['medium'])
+    self.textbox = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 84, msg, FONTS['medium'])
 
     -- function to be called once this message is popped
     self.onClose = onClose or function() end

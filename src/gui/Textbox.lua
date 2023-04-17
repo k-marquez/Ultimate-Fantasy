@@ -4,6 +4,8 @@
 
     Author: Colton Ogden
     cogden@cs50.harvard.edu
+
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
     
     This class contains the class TextBox.
 ]]
@@ -75,4 +77,8 @@ function Textbox:render()
     for i = 1, #self.displayingChunks do
         love.graphics.print(self.displayingChunks[i], self.x + 3, self.y + 3 + (i - 1) * 16)
     end
+end
+
+function Textbox:toggle()
+    self.panel:toggle()
 end

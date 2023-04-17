@@ -5,6 +5,8 @@
     Author: Colton Ogden
     cogden@cs50.harvard.edu
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     The Selection class gives us a list of textual items that link to callbacks;
     this particular definition only has one dimension of items (vertically),
     but a more robust definition might include columns as well for a more

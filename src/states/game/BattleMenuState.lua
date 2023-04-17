@@ -6,21 +6,23 @@
     cogden@cs50.harvard.edu
 
     Modified by: Alejandro Mujica (alejandro.j.mujic4@gmail.com)
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
 
     This class contains the class BattleMenuState.
 ]]
 BattleMenuState = Class{__includes = BaseState}
 
 function BattleMenuState:init(battleState)
-    self.classType = 'BattleMenuState'
-    
     self.battleState = battleState
-    
+    self.c = self.battleState.party.characters
+    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 64, '\t\t\t\t\tHEALTH POINTS\n'..self.c[1].name..'\t'..self.c[1].currentHP..' / '..self.c[1].HP..'\t\t\t'..self.c[2].name..'\t'..self.c[2].currentHP..' / '..self.c[2].HP..'\n'..self.c[3].name..'\t'..self.c[3].currentHP..' / '..self.c[3].HP..'\t\t'..self.c[4].name..'\t'..self.c[4].currentHP..' / '..self.c[4].HP, FONTS['small'])
+    self.battleInfo:toggle()
+
     self.battleMenu = Menu {
-        x = VIRTUAL_WIDTH - 64,
-        y = VIRTUAL_HEIGHT - 64,
-        width = 64,
-        height = 64,
+        x = VIRTUAL_WIDTH - 84,
+        y = VIRTUAL_HEIGHT - 84,
+        width = 84,
+        height = 84,
         items = {
             {
                 text = 'Fight',
@@ -80,4 +82,5 @@ end
 
 function BattleMenuState:render()
     self.battleMenu:render()
+    self.battleInfo:render()
 end

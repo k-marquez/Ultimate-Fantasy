@@ -9,6 +9,7 @@
     marquezberriosk@gmail.com
 
     Modified by: Lewis Ochoa
+    lewis8a@gmail.com
 
     This class contains the definition for entities.
 ]]

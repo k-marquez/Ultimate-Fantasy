@@ -5,6 +5,8 @@
     Author: Colton Ogden
     cogden@cs50.harvard.edu
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This class contains the class Panel.
 ]]
 Panel = Class{}
@@ -26,7 +28,7 @@ function Panel:render()
     if self.visible then
         love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
         love.graphics.rectangle('fill', self.x, self.y, self.width, self.height, 3)
-        love.graphics.setColor(love.math.colorFromBytes(56, 56, 56, 255))
+        love.graphics.setColor(love.math.colorFromBytes(0, 0, 255, 255))
         love.graphics.rectangle('fill', self.x + 2, self.y + 2, self.width - 4, self.height - 4, 3)
         love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
     end

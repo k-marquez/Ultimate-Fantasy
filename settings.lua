@@ -5,6 +5,8 @@
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This file contains the game settings that include dependencies, constants of values to set
     up the game, sounds, textures, frames, and fonts.
 ]]
@@ -125,6 +127,7 @@ FRAMES = {
 }
 
 FONTS = {
+    ['super-small'] = love.graphics.newFont('fonts/font.ttf', 6),
     ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
     ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
     ['large'] = love.graphics.newFont('fonts/font.ttf', 32),

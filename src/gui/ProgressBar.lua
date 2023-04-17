@@ -4,6 +4,8 @@
 
     Author: Colton Ogden
     cogden@cs50.harvard.edu
+
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
     
     This class contains the class ProgressBar.
 ]]
