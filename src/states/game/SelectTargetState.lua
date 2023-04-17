@@ -5,6 +5,8 @@
     Author: Alejandro Mujica
     aledrums@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This class contains the class SelectTargetState.
 ]]
 SelectTargetState = Class{__includes = BaseState}
@@ -50,8 +52,12 @@ function SelectTargetState:update(dt)
         e:update(dt)
     end
     if love.keyboard.wasPressed('right') then
+        SOUNDS['enemy']:stop()
+        SOUNDS['enemy']:play()
         self:findNextAlive()
     elseif love.keyboard.wasPressed('left') then
+        SOUNDS['enemy']:stop()
+        SOUNDS['enemy']:play()
         self:findPrevAlive()
     elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         -- pop this state

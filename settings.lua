@@ -150,5 +150,9 @@ SOUNDS = {
     ['victory'] = love.audio.newSource('sounds/victory.wav', 'static'),
     ['levelup'] = love.audio.newSource('sounds/levelup.wav', 'static'),
     ['exp'] = love.audio.newSource('sounds/exp.wav', 'static'),
-    ['the-end'] = love.audio.newSource('sounds/the_end.mp3', 'static')
+    ['the-end'] = love.audio.newSource('sounds/the_end.mp3', 'static'),
+    ['enemy'] = love.audio.newSource('sounds/enemy.mp3', 'static'),
+    ['change'] = love.audio.newSource('sounds/change.mp3', 'static'),
+    ['select'] = love.audio.newSource('sounds/select.mp3', 'static'),
+    ['transition'] = love.audio.newSource('sounds/transition.mp3', 'static')
 }

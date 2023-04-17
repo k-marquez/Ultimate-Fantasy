@@ -5,6 +5,8 @@
     Author: Alejandro Mujica
     aledrums@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This class contains the class StartState.
 ]]
 StartState = Class{__includes = BaseState}
@@ -16,6 +18,7 @@ end
 
 function StartState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        SOUNDS['transition']:play()
         stateStack:push(FadeInState({
             r = 0, g = 0, b = 0
         }, 1,

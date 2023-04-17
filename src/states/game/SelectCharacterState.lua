@@ -5,6 +5,8 @@
     Author: Alejandro Mujica
     aledrums@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This class contains the class SelectCharacterState.
 ]]
 SelectCharacterState = Class{__includes = BaseState}
@@ -24,7 +26,11 @@ function SelectCharacterState:update(dt)
         else
             self.selected = 'male'
         end
+        SOUNDS['change']:stop()
+        SOUNDS['change']:play()
     elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        SOUNDS['select']:stop()
+        SOUNDS['select']:play()
         table.insert(self.party, self.character, self.selected)
         if self.character < NUM_CHARACTERS then
             stateStack:pop()
