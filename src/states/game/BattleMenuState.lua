@@ -15,7 +15,7 @@ BattleMenuState = Class{__includes = BaseState}
 function BattleMenuState:init(battleState)
     self.battleState = battleState
     self.c = self.battleState.party.characters
-    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 64, '\t\t\t\t\tHEALTH POINTS\n'..self.c[1].name..'\t'..self.c[1].currentHP..' / '..self.c[1].HP..'\t\t\t'..self.c[2].name..'\t'..self.c[2].currentHP..' / '..self.c[2].HP..'\n'..self.c[3].name..'\t'..self.c[3].currentHP..' / '..self.c[3].HP..'\t\t'..self.c[4].name..'\t'..self.c[4].currentHP..' / '..self.c[4].HP, FONTS['small'])
+    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 64, '\t\t\t\t\t\t\tHEALTH POINTS\n'..self.c[1].name..'\t\t '..self.c[1].currentHP..' / '..self.c[1].HP..'\t\t\t'..self.c[2].name..'\t\t'..self.c[2].currentHP..' / '..self.c[2].HP..'\n'..self.c[3].name..'\t\t'..self.c[3].currentHP..' / '..self.c[3].HP..'\t\t\t'..self.c[4].name..'\t'..self.c[4].currentHP..' / '..self.c[4].HP, FONTS['small'])
     self.battleInfo:toggle()
 
     self.battleMenu = Menu {
