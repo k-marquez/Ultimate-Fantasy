@@ -240,6 +240,13 @@ function TakeTurnState:victory()
     SOUNDS['victory']:setLooping(true)
     SOUNDS['victory']:play()
 
+    while true do
+        if stateStack.states[#stateStack.states].classType ~= 'BattleState' then
+            stateStack:pop()
+        end
+        break
+    end
+
     -- when finished, push a victory message
     stateStack:push(BattleMessageState(self.battleState, 'Victory!',
         function()
