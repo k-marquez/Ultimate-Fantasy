@@ -240,13 +240,6 @@ function TakeTurnState:victory()
     SOUNDS['victory']:setLooping(true)
     SOUNDS['victory']:play()
 
-    while true do
-        if stateStack.states[#stateStack.states].classType ~= 'BattleState' then
-            stateStack:pop()
-        end
-        break
-    end
-
     -- when finished, push a victory message
     stateStack:push(BattleMessageState(self.battleState, 'Victory!',
         function()
@@ -260,7 +253,20 @@ function TakeTurnState:victory()
 end
 
 function TakeTurnState:fadeOut()
+    print("Antes del FadeInState y de eliminar")
+    for index, state in ipairs(stateStack.states) do
+        print(index,state.classType)
+    end
+
+    while true do
+        if stateStack.states[#stateStack.states].classType ~= 'BattleState' then
+            stateStack:pop()
+        end
+        break
+    end
+
     if self.battleState.finalBoss then
+
         SOUNDS['victory']:stop()
 
         stateStack:push(FadeInState({
@@ -286,13 +292,20 @@ function TakeTurnState:fadeOut()
             SOUNDS['victory']:stop()
             SOUNDS['world']:play()
 
-            stateStack:pop()
-            
             -- pop off the battle state
             stateStack:pop()
+            print("Antes del FadeOutState")
+            for index, state in ipairs(stateStack.states) do
+                print(index,state.classType)
+            end
             stateStack:push(FadeOutState({
                 r = 255, g = 255, b = 255
-            }, 1, function() end))
+            }, 1, function()
+                print("Despues del FadeOutState")
+                for index, state in ipairs(stateStack.states) do
+                    print(index,state.classType)
+                end
+            end))
         end))
     end
 end
