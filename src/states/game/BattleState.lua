@@ -13,6 +13,7 @@
 BattleState = Class{__includes = BaseState}
 
 function BattleState:init(party, region, onExit)
+    self.classType = 'BattleState'
     self.party = party
     self.region = region
     self.onExit = onExit or function() end

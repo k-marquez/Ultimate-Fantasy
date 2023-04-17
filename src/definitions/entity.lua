@@ -5,6 +5,11 @@
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
 
+    Modified by: Kevin Márquez
+    marquezberriosk@gmail.com
+
+    Modified by: Lewis Ochoa
+
     This class contains the definition for entities.
 ]]
 DEFAULT_CHARACTER_FRAME = 8

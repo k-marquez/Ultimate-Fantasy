@@ -10,6 +10,7 @@
 SelectTargetState = Class{__includes = BaseState}
 
 function SelectTargetState:init(battleState, targets, onTargetSelected)
+    self.classType = 'SelectTargetState'
     self.battleState = battleState
     self.targets = targets
     self.onTargetSelected = onTargetSelected or function() end

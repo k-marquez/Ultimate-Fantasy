@@ -10,6 +10,7 @@
 StatsMenuState = Class{__includes = BaseState}
 
 function StatsMenuState:init(character, stats, onClose)
+    self.classType = 'StatsMenuState'
     self.character = character
     self.HPIncrease = stats.HPIncrease
     self.attackIncrease = stats.attackIncrease

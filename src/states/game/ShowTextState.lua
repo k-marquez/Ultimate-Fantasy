@@ -10,6 +10,7 @@
 ShowTextState = Class{__includes = BaseState}
 
 function ShowTextState:init(color, text, onShowTextComplete)
+    self.classType = 'ShowTextState'
     self.r = color.r
     self.g = color.g
     self.b = color.b

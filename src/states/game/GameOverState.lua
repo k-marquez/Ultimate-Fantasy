@@ -9,6 +9,10 @@
 ]]
 GameOverState = Class{__includes = BaseState}
 
+function GameOverState:init(params)
+    self.classType = 'GameOverState'
+end
+
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
         for k, s in pairs(SOUNDS) do

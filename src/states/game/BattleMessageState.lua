@@ -10,6 +10,7 @@
 BattleMessageState = Class{__includes = BaseState}
 
 function BattleMessageState:init(battleState, msg, onClose, canInput)
+    self.classType = 'BattleMessageState'
     self.battleState = battleState
     self.textbox = Textbox(0, VIRTUAL_HEIGHT - 64, VIRTUAL_WIDTH, 64, msg, FONTS['medium'])
 

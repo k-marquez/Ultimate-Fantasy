@@ -5,6 +5,11 @@
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
 
+    Modified by: Kevin Márquez
+    marquezberriosk@gmail.com
+
+    Modified by: Lewis Ochoa
+
     This class contains the class BattleEntity.
 ]]
 BattleEntity = Class{__includes = Entity}
@@ -38,7 +43,6 @@ end
 
 function BattleEntity:updateElapsedRestTime(dt)
     self.elapsedRestTime = self.elapsedRestTime - dt
-    print(self.class, self.elapsedRestTime)
     if self.elapsedRestTime <= 0 then
         self.elapsedRestTime = self.restTime
         self.canAttack = true

@@ -10,6 +10,7 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init(def)
+    self.classType = 'PlayState'
     world = World(def)
 end
 

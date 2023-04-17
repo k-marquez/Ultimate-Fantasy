@@ -12,6 +12,8 @@
 BattleMenuState = Class{__includes = BaseState}
 
 function BattleMenuState:init(battleState)
+    self.classType = 'BattleMenuState'
+    
     self.battleState = battleState
     
     self.battleMenu = Menu {

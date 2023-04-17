@@ -10,6 +10,7 @@
 SelectActionState = Class{__includes = BaseState}
 
 function SelectActionState:init(battleState, entity, onActionSelected)
+    self.classType = 'SelectActionState'
     self.battleState = battleState
     self.entity = entity
 

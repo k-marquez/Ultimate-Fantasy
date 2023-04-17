@@ -9,6 +9,10 @@
 ]]
 TheEndState = Class{__includes = BaseState}
 
+function TheEndState:init(params)
+    self.classType = 'TheEndState'
+end
+
 function TheEndState:update(dt)
     if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
         for k, s in pairs(SOUNDS) do
