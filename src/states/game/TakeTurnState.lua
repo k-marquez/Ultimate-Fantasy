@@ -72,15 +72,14 @@ function TakeTurnState:takePartyTurn(i)
         return
     end
 
+    stateStack:push(SelectActionState(self.battleState, c,
+    
+    -- callback for when the action has been selected
     function()
-        stateStack:push(SelectActionState(self.battleState, c,
-        
-        -- callback for when the action has been selected
-        function()
-            if self:checkAllDeath(self.enemies) then
-                self:victory()
-            end
-        end))
+        if self:checkAllDeath(self.enemies) then
+            self:victory()
+        end
+    end))
 end
 
 function TakeTurnState:takeEnemyTurn(i)
