@@ -5,6 +5,9 @@
     Author: Alejandro Mujica
     aledrums@gmail.com
 
+    Modified by: Lewis Ochoa
+    lewis8a@gmail.com
+
     This class contains the class StatsMenuState.
 ]]
 StatsMenuState = Class{__includes = BaseState}
@@ -26,9 +29,9 @@ function StatsMenuState:init(character, stats, onClose)
     
     self.statsMenu = Menu {
         x = 0,
-        y = VIRTUAL_HEIGHT - 64,
+        y = VIRTUAL_HEIGHT - 84,
         width = VIRTUAL_WIDTH,
-        height = 64,
+        height = 84,
         showCursor = false,
         font = FONTS['small'],
         items = {

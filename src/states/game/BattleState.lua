@@ -9,6 +9,7 @@
     marquezberriosk@gmail.com
 
     Modified by: Lewis Ochoa
+    lewis8a@gmail.com
 ]]
 BattleState = Class{__includes = BaseState}
 
@@ -27,7 +28,7 @@ function BattleState:init(party, region, onExit)
     self:createMap()
     self.party:setBattlePositions()  
 
-    self.bottomPanel = Panel(0, VIRTUAL_HEIGHT - 64, VIRTUAL_WIDTH, 64)
+    self.bottomPanel = Panel(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 84)
 
     -- flag for when the battle can take input, set in the first update call
     self.battleStarted = false

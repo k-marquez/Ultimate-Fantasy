@@ -5,6 +5,8 @@
     Author: Alejandro Mujica
     aledrums@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+    
     This class contains the class SelectActionState.
 ]]
 SelectActionState = Class{__includes = BaseState}
@@ -70,12 +72,17 @@ function SelectActionState:init(battleState, entity, onActionSelected)
         end
     })
     
+    self.c = self.battleState.party.characters
+    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 84,'\t\t\tHP\t\tLEVEL\tEXP\tATTACK\tDEFENSE\tMAGIC\n'..self.c[1].name..'\t'..self.c[1].currentHP..' / '..self.c[1].HP..'\t\t'..self.c[1].level..'\t\t'..self.c[1].currentExp..'\t\t'..self.c[1].attack..'\t\t'..self.c[1].defense..'\t\t'..self.c[1].magic..'\n'..self.c[2].name..'\t'..self.c[2].currentHP..' / '..self.c[2].HP..'\t\t'..self.c[2].level..'\t\t'..self.c[2].currentExp..'\t\t'..self.c[2].attack..'\t\t'..self.c[2].defense..'\t\t'..self.c[2].magic..'\n'..self.c[3].name..'\t'..self.c[3].currentHP..' / '..self.c[3].HP..'\t\t'..self.c[3].level..'\t\t'..self.c[3].currentExp..'\t\t'..self.c[3].attack..'\t\t'..self.c[3].defense..'\t\t'..self.c[3].magic..'\n'..self.c[4].name..'\t'..self.c[4].currentHP..' / '..self.c[4].HP..'\t\t'..self.c[4].level..'\t\t'..self.c[4].currentExp..'\t\t'..self.c[4].attack..'\t\t'..self.c[4].defense..'\t\t'..self.c[4].magic, FONTS['small'])
+    self.battleInfo:toggle()
+
     self.actionMenu = Menu {
-        x = 0,
-        y = VIRTUAL_HEIGHT - 64,
-        width = VIRTUAL_WIDTH ,
-        height = 64,
-        items = menuItems
+        x = VIRTUAL_WIDTH - 84,
+        y = VIRTUAL_HEIGHT - 84,
+        width = 84,
+        height = 84,
+        items = menuItems,
+        font = FONTS['small']
     }
 end
 
@@ -88,4 +95,5 @@ end
 
 function SelectActionState:render()
     self.actionMenu:render()
+    self.battleInfo:render()
 end

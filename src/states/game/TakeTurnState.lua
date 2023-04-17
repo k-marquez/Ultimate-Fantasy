@@ -9,6 +9,7 @@
     marquezberriosk@gmail.com
 
     Modified by: Lewis Ochoa
+    lewis8a@gmail.com
 
     This class contains the class TakeTurnState.
 ]]
@@ -71,17 +72,14 @@ function TakeTurnState:takePartyTurn(i)
         return
     end
 
-    stateStack:push(BattleMessageState(self.battleState, 'Turn for ' .. c.name .. '! Select an action.',
-        -- callback for when the battle message is closed
+    function()
+        stateStack:push(SelectActionState(self.battleState, c,
+        
+        -- callback for when the action has been selected
         function()
-            stateStack:push(SelectActionState(self.battleState, c,
-            
-            -- callback for when the action has been selected
-            function()
-                if self:checkAllDeath(self.enemies) then
-                    self:victory()
-                end
-            end))
+            if self:checkAllDeath(self.enemies) then
+                self:victory()
+            end
         end))
 end
 
