@@ -10,6 +10,7 @@
 StartState = Class{__includes = BaseState}
 
 function StartState:init()
+    self.classType = 'StartState'
     SOUNDS['intro']:play()
 end
 

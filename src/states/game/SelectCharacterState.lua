@@ -10,6 +10,7 @@
 SelectCharacterState = Class{__includes = BaseState}
 
 function SelectCharacterState:init(def)
+    self.classType = 'SelectCharacterState'
     self.character = def.character or 1
     self.selected = def.selected or 'male'
     self.character_type = ENTITY_DEFS.characters[self.character]

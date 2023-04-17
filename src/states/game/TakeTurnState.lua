@@ -10,6 +10,7 @@
 TakeTurnState = Class{__includes = BaseState}
 
 function TakeTurnState:init(battleState)
+    self.classType = 'TakeTurnState'
     self.battleState = battleState
     self.party = battleState.party
     self.characters = self.party.characters
@@ -250,6 +251,10 @@ function TakeTurnState:fadeOut()
             function() end))
         end))
     else
+        print("Antes de FadeInState")
+        for index, state in ipairs(stateStack.states) do
+            print(index,state.classType)
+        end
         -- fade in
         stateStack:push(FadeInState({
             r = 255, g = 255, b = 255
@@ -264,10 +269,18 @@ function TakeTurnState:fadeOut()
             
             -- pop off the battle state
             stateStack:pop()
-            
+            print("Antes del FadeOutState")
+            for index, state in ipairs(stateStack.states) do
+                print(index,state.classType)
+            end
             stateStack:push(FadeOutState({
                 r = 255, g = 255, b = 255
-            }, 1, function() end))
+            }, 1, function() 
+                print("Despues del FadeOutState")
+                for index, state in ipairs(stateStack.states) do
+                    print(index,state.classType)
+                end
+            end))
         end))
     end
 end
