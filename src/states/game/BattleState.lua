@@ -39,6 +39,7 @@ function BattleState:init(party, region, onExit)
 
     self.energyBars = {}
     self.expBars = {}
+    self.restTimeBars = {}
 
     -- add party energy and exp bars
     for k, c in pairs(self.party.characters) do
@@ -61,6 +62,15 @@ function BattleState:init(party, region, onExit)
                 value = c.currentExp,
                 max = c.expToLevel
             }
+            self.restTimeBars[c.name] = ProgressBar {
+                x = c.x - math.floor(c.width/4),
+                y = c.y - 11,
+                width = math.floor(c.width*1.5),
+                height = 3,
+                color = {r = 255, g = 10, b = 10},
+                value = c.elapsedRestTime,
+                max = c.restTime
+            }
         end
     end
 
@@ -75,6 +85,15 @@ function BattleState:init(party, region, onExit)
                 color = {r = 189, g = 32, b = 32},
                 value = e.currentHP,
                 max = e.HP
+            }
+            self.restTimeBars[e.name] = ProgressBar {
+                x = e.x - math.floor(e.width/4),
+                y = e.y - 8,
+                width = math.floor(e.width*1.5),
+                height = 3,
+                color = {r = 255, g = 10, b = 10},
+                value = e.elapsedRestTime,
+                max = e.restTime
             }
         end
     end
@@ -232,6 +251,7 @@ function BattleState:render()
         if not c.dead then
             self.energyBars[c.name]:render()
             self.expBars[c.name]:render()
+            self.restTimeBars[c.name]:render()
         end
     end
 
@@ -240,6 +260,7 @@ function BattleState:render()
         if not e.dead then
             e:render()
             self.energyBars[e.name]:render()
+            self.restTimeBars[e.name]:render()
         end
     end
 

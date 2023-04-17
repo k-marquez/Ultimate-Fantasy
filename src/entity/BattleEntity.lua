@@ -41,8 +41,12 @@ function BattleEntity:init(def)
     self.canAttack = false
 end
 
-function BattleEntity:updateElapsedRestTime(dt)
-    self.elapsedRestTime = self.elapsedRestTime - dt
+function BattleEntity:updateElapsedRestTime(dt, progressBar)
+    if not self.canAttack then
+        self.elapsedRestTime = self.elapsedRestTime - dt
+        progressBar.value = self.elapsedRestTime
+    end
+
     if self.elapsedRestTime <= 0 then
         self.elapsedRestTime = self.restTime
         self.canAttack = true

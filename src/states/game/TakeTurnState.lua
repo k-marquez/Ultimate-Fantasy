@@ -21,20 +21,26 @@ function TakeTurnState:init(battleState)
     self.characters = self.party.characters
     self.enemies = battleState.enemies
     self.enemyAttacksInARow = 0
+
+    for index, c in ipairs(self.characters) do
+        if not c.dead then
+            Timer.every(0.2,function()
+                c:updateElapsedRestTime(0.2, self.battleState.restTimeBars[c.name])
+            end)
+        end
+    end
+
+    for index, e in ipairs(self.enemies) do
+        Timer.every(0.2,function()
+            e:updateElapsedRestTime(0.2,self.battleState.restTimeBars[e.name])
+        end)
+    end
 end
 
 function TakeTurnState:update(dt)
     for k, e in pairs(self.enemies) do
         e:update(dt)
-        e:updateElapsedRestTime(dt)
     end
-
-    for k, c in pairs(self.party.characters) do
-        if not c.dead then
-            c:updateElapsedRestTime(dt)
-        end
-    end
-
     self:takeTurn()
 end
 
