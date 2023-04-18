@@ -104,7 +104,7 @@ ENTITY_DEFS = {
                 attackIV = 5,
                 defenseIV = 5,
                 magicIV = 0,
-                restTime = 3
+                restTime = 2
             },
             actions = {
                 {
@@ -141,7 +141,7 @@ ENTITY_DEFS = {
                 attackIV = 7,
                 defenseIV = 4,
                 magicIV = 1,
-                restTime = 4
+                restTime = 5
             },
             actions = {
                 {
@@ -193,7 +193,7 @@ ENTITY_DEFS = {
                 attackIV = 2,
                 defenseIV = 2,
                 magicIV = 7,
-                restTime = 4
+                restTime = 3
             },
             actions = {
                 {
@@ -245,7 +245,7 @@ ENTITY_DEFS = {
                 attackIV = 3,
                 defenseIV = 2,
                 magicIV = 8,
-                restTime = 5
+                restTime = 6
             },
             actions = {
                 {
