@@ -22,12 +22,15 @@ function TakeTurnState:init(battleState)
     self.characters = self.party.characters
     self.enemies = battleState.enemies
     self.enemyAttacksInARow = 0
+    self.allEntitys = {}
 
     for index, c in ipairs(self.characters) do
         if not c.dead then
             Timer.every(0.2,function()
                 c:updateElapsedRestTime(0.2, self.battleState.restTimeBars[c.name])
             end)
+            local ent = {entity = c, type = 'c', i = index}
+            table.insert(self.allEntitys, ent)
         end
     end
 
@@ -35,32 +38,28 @@ function TakeTurnState:init(battleState)
         Timer.every(0.2,function()
             e:updateElapsedRestTime(0.2,self.battleState.restTimeBars[e.name])
         end)
+        local ent = {entity = e, type = 'e', i = index}
+        table.insert(self.allEntitys, ent)
     end
 end
 
 function TakeTurnState:update(dt)
+    self:takeTurn()
+
     for k, e in pairs(self.enemies) do
         e:update(dt)
     end
-    self:takeTurn()
-end
-
-function TakeTurnState:enter(params)
-    self:takeTurn()
 end
 
 function TakeTurnState:takeTurn()
-    for k, c in pairs(self.characters) do
-        if c.canAttack then
-            c.canAttack = false
-            self:takePartyTurn(k)
-        end
-    end
-
-    for k, e in pairs(self.enemies) do
-        if e.canAttack then
-            e.canAttack = false
-            self:takeEnemyTurn(k)
+    for k, register in pairs(self.allEntitys) do
+        if register.entity.canAttack then
+            register.entity.canAttack = false
+            if register.type == 'c' then
+                self:takePartyTurn(register.i)
+            else
+                self:takeEnemyTurn(register.i)
+            end
         end
     end
 end
@@ -261,8 +260,9 @@ function TakeTurnState:fadeOut()
     while true do
         if stateStack.states[#stateStack.states].classType ~= 'BattleState' then
             stateStack:pop()
+        else
+            break
         end
-        break
     end
 
     if self.battleState.finalBoss then
