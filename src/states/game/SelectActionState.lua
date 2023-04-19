@@ -110,8 +110,34 @@ function SelectActionState:init(battleState, entity, onActionSelected)
     else
         space3 = ""
     end
-    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 84,'\t\t\t\t  HP\t\tLEVEL\tEXP\tATTACK\tDEFENSE\tMAGIC\n'..current4..self.c[4].name..'\t'..space1..self.c[4].currentHP..' / '..self.c[4].HP..'\t'..self.c[4].level..'\t\t'..self.c[4].currentExp..'\t\t'..self.c[4].attack..'\t\t'..self.c[4].defense..'\t\t'..self.c[4].magic..'\n'..current3..self.c[3].name..'\t   '..space2..self.c[3].currentHP..' / '..self.c[3].HP..'\t'..self.c[3].level..'\t\t'..self.c[3].currentExp..'\t\t'..self.c[3].attack..'\t\t'..self.c[3].defense..'\t\t'..self.c[3].magic..'\n', FONTS['small'])
-    self.battleInfo2 = Textbox(0, VIRTUAL_HEIGHT - 34, VIRTUAL_WIDTH, 84,current2..self.c[2].name..'\t     '..self.c[2].currentHP..' / '..self.c[2].HP..'\t'..self.c[2].level..'\t\t'..self.c[2].currentExp..'\t\t'..self.c[2].attack..'\t\t'..self.c[2].defense..'\t\t'..self.c[2].magic..'\n'..current1..self.c[1].name..'\t\t'..space3..self.c[1].currentHP..' / '..self.c[1].HP..'\t'..self.c[1].level..'\t\t'..self.c[1].currentExp..'\t\t'..self.c[1].attack..'\t\t'..self.c[1].defense..'\t\t'..self.c[1].magic, FONTS['small'])
+    h = 34
+    if self.c[1].currentHP > 0 then
+        character1 = current1..self.c[1].name..'\t\t'..space3..self.c[1].currentHP..' / '..self.c[1].HP..'\t'..self.c[1].level..'\t\t'..self.c[1].currentExp..'\t\t'..self.c[1].attack..'\t\t'..self.c[1].defense..'\t\t'..self.c[1].magic..'\n'
+    else
+        character1 = ""
+        h = 52
+    end
+    if self.c[2].currentHP > 0 then
+        character2 = current2..self.c[2].name..'\t     '..self.c[2].currentHP..' / '..self.c[2].HP..'\t'..self.c[2].level..'\t\t'..self.c[2].currentExp..'\t\t'..self.c[2].attack..'\t\t'..self.c[2].defense..'\t\t'..self.c[2].magic..'\n' 
+    else
+        character2 = ""
+        h = 52
+    end
+    if self.c[3].currentHP > 0 then
+        character3 = current3..self.c[3].name..'\t   '..space2..self.c[3].currentHP..' / '..self.c[3].HP..'\t'..self.c[3].level..'\t\t'..self.c[3].currentExp..'\t\t'..self.c[3].attack..'\t\t'..self.c[3].defense..'\t\t'..self.c[3].magic..'\n'
+    else
+        character3 = ""
+    end
+    if self.c[4].currentHP > 0 then
+        character4 = current4..self.c[4].name..'\t'..space1..self.c[4].currentHP..' / '..self.c[4].HP..'\t'..self.c[4].level..'\t\t'..self.c[4].currentExp..'\t\t'..self.c[4].attack..'\t\t'..self.c[4].defense..'\t\t'..self.c[4].magic..'\n'
+    else
+        character4 = ""
+    end
+    if self.c[1].currentHP <= 0 and self.c[2].currentHP <= 0 then
+        h = 68
+    end
+    self.battleInfo = Textbox(0, VIRTUAL_HEIGHT - 84, VIRTUAL_WIDTH, 84,'\t\t\t\t  HP\t\tLEVEL\tEXP\tATTACK\tDEFENSE\tMAGIC\n'..character1..character2, FONTS['small'])
+    self.battleInfo2 = Textbox(0, VIRTUAL_HEIGHT - h, VIRTUAL_WIDTH, 84,character3..character4, FONTS['small'])
     self.battleInfo2:toggle()
 
     self.actionMenu = Menu {
