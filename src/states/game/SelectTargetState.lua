@@ -13,7 +13,9 @@ SelectTargetState = Class{__includes = BaseState}
 
 function SelectTargetState:init(battleState, targets, onTargetSelected)
     self.classType = 'SelectTargetState'
-    self.battleState = battleState
+    if battleState ~= 'Menu' then
+        self.battleState = battleState
+    end
     self.targets = targets
     self.onTargetSelected = onTargetSelected or function() end
     self.currentSelection = 1
@@ -48,8 +50,10 @@ end
 
 
 function SelectTargetState:update(dt)
-    for k, e in pairs(self.battleState.enemies) do
-        e:update(dt)
+    if self.battleState ~= nil then
+        for k, e in pairs(self.battleState.enemies) do
+            e:update(dt)
+        end
     end
     if love.keyboard.wasPressed('right') then
         SOUNDS['enemy']:stop()

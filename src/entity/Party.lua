@@ -5,6 +5,8 @@
     Author: Alejandro Mujics
     alejandro.j.mujic4@gmail.com
 
+    Modified by: Lewis Ochoa (lewis8a@gmail.com)
+
     This class contains the class Party.
 ]]
 Party = Class{}
@@ -137,4 +139,8 @@ end
 
 function Party:render()
     self.stateMachine:render()
+end
+
+function Party:menu()
+    stateStack:push(CharacterMenuState(self.characters,3))
 end

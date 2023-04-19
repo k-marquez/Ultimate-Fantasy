@@ -60,6 +60,7 @@ require 'src/states/game/StartState'
 require 'src/states/game/StatsMenuState'
 require 'src/states/game/TakeTurnState'
 require 'src/states/game/TheEndState'
+require 'src/states/game/CharacterMenuState'
 
 -- World
 require 'src/world/Region'

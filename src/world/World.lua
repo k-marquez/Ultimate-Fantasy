@@ -132,6 +132,10 @@ function World:update(dt)
         end
     end
 
+    if love.keyboard.wasPressed('m') then
+        self.party:menu()
+    end
+
 end
 
 function World:render()
