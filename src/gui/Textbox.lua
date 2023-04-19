@@ -11,7 +11,7 @@
 ]]
 Textbox = Class{}
 
-function Textbox:init(x, y, width, height, text, font)
+function Textbox:init(x, y, width, height, text, font, dialogue)
     self.panel = Panel(x, y, width, height)
     self.x = x
     self.y = y
@@ -25,7 +25,7 @@ function Textbox:init(x, y, width, height, text, font)
     self.chunkCounter = 1
     self.endOfText = false
     self.closed = false
-
+    self.dialogue = dialogue or false
     self:next()
 end
 
@@ -37,13 +37,15 @@ function Textbox:nextChunks()
 
     for i = self.chunkCounter, self.chunkCounter + 2 do
         table.insert(chunks, self.textChunks[i])
-        if i % 3 == 0 then
+        if i % 3 == 0 and self.dialogue then
             table.insert(chunks, "Press ENTER to Continue")
         end
         -- if we've reached the number of total chunks, we can return
         if i == #self.textChunks then
             self.endOfText = true
-            table.insert(chunks, "Press ENTER to Return")
+            if self.dialogue then
+                table.insert(chunks, "Press ENTER to Return")
+            end
             return chunks
         end
     end
@@ -84,4 +86,8 @@ end
 
 function Textbox:toggle()
     self.panel:toggle()
+end
+
+function Textbox:isDialogue()
+    self.dialogue = true
 end

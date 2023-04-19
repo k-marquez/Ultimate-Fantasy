@@ -11,7 +11,7 @@ DialogueState = Class{__includes = BaseState}
 
 function DialogueState:init(text, callback)
     self.classType = 'DialogueState'
-    self.textbox = Textbox(6, 6, VIRTUAL_WIDTH - 12, 64, text, FONTS['small'])
+    self.textbox = Textbox(6, 6, VIRTUAL_WIDTH - 12, 64, text, FONTS['small'], 1)
     self.callback = callback or function() end
 end
 

@@ -31,7 +31,7 @@ function StatsMenuState:init(character, stats, onClose)
         x = 0,
         y = VIRTUAL_HEIGHT - 84,
         width = VIRTUAL_WIDTH,
-        height = 84,
+        height = 88,
         showCursor = false,
         font = FONTS['medium'],
         items = {
