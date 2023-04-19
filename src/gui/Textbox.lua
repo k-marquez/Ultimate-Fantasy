@@ -37,10 +37,13 @@ function Textbox:nextChunks()
 
     for i = self.chunkCounter, self.chunkCounter + 2 do
         table.insert(chunks, self.textChunks[i])
-
+        if i % 3 == 0 then
+            table.insert(chunks, "Press ENTER to Continue")
+        end
         -- if we've reached the number of total chunks, we can return
         if i == #self.textChunks then
             self.endOfText = true
+            table.insert(chunks, "Press ENTER to Return")
             return chunks
         end
     end

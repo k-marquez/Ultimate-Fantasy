@@ -33,7 +33,7 @@ function StatsMenuState:init(character, stats, onClose)
         width = VIRTUAL_WIDTH,
         height = 84,
         showCursor = false,
-        font = FONTS['small'],
+        font = FONTS['medium'],
         items = {
             {
                 text = 'HP: ' .. self.previousHP .. ' + ' .. self.HPIncrease .. ' = ' .. self.character.HP,

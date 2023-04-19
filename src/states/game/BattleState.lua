@@ -68,7 +68,7 @@ function BattleState:init(party, region, onExit)
                 y = c.y - 11,
                 width = math.floor(c.width*1.5),
                 height = 3,
-                color = {r = 255, g = 10, b = 10},
+                color = {r = 255, g = 255, b = 0},
                 value = 0,
                 max = c.restTime
             }
@@ -92,7 +92,7 @@ function BattleState:init(party, region, onExit)
                 y = e.y - 8,
                 width = math.floor(e.width*1.5),
                 height = 3,
-                color = {r = 255, g = 10, b = 10},
+                color = {r = 255, g = 255, b = 0},
                 value = e.elapsedRestTime,
                 max = e.restTime
             }
