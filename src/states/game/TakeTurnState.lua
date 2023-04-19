@@ -24,39 +24,26 @@ function TakeTurnState:init(battleState)
     self.enemyAttacksInARow = 0
     self.allEntitys = {}
     self.attackQueue = {}
-    
-    local k = 1
+
     for index, c in ipairs(self.characters) do
         if not c.dead then
-            -- Timer.every(0.2,function()
-            --     c:updateElapsedRestTime(0.2, self.battleState.restTimeBars[c.name])
-            -- end)
             local ent = {entity = c, type = 'c', i = index}
+            c.elapsedRestTime = 0
             table.insert(self.attackQueue, ent)
-
         end
     end
 
     for index, e in ipairs(self.enemies) do
-        -- Timer.every(0.2,function()
-        --     e:updateElapsedRestTime(0.2,self.battleState.restTimeBars[e.name])
-        -- end)
         local ent = {entity = e, type = 'e', i = index}
         table.insert(self.attackQueue, ent)
     end
 end
 
 function TakeTurnState:update(dt)
-    print('Entidades')
-    for index, register in ipairs(self.allEntitys) do
-        print(index, register.entity.name, register.inQueue)
-    end
-
     for k, e in pairs(self.enemies) do
         e:update(dt)
     end
 
-    print("Registrando entidades en cola de ataque")
     for k = #self.allEntitys, 1, -1 do
         self.allEntitys[k].entity:updateElapsedRestTime(
             dt,
@@ -64,26 +51,18 @@ function TakeTurnState:update(dt)
         )
         if self.allEntitys[k].entity.canAttack then
             self.allEntitys[k].entity.canAttack = false
-            print(
-                self.allEntitys[k].entity.elapsedRestTime,
-                self.allEntitys[k].entity.name
-            )
             table.insert(self.attackQueue, table.remove(self.allEntitys, k))
         end
     end
 
     if #self.attackQueue >= 1 then
         local attackEntity = table.remove(self.attackQueue, 1)
-        print('Entidad atacante:', attackEntity.entity.name)
         if attackEntity.type == 'c' then
             self:takePartyTurn(attackEntity.i)
         else
             self:takeEnemyTurn(attackEntity.i)
         end
-        print('Entidades en cola')
-        for index, register in ipairs(self.attackQueue) do
-            print(index, register.entity.name)
-        end
+        attackEntity.entity.elapsedRestTime = attackEntity.entity.restTime
         table.insert(self.allEntitys,attackEntity)
     end
 end
@@ -263,6 +242,12 @@ function TakeTurnState:victory()
     SOUNDS['victory']:setLooping(true)
     SOUNDS['victory']:play()
 
+    for index, c in ipairs(self.party) do
+        if not c.dead then
+            c.elapsedRestTime = 0
+        end
+    end
+
     -- when finished, push a victory message
     stateStack:push(BattleMessageState(self.battleState, 'Victory!',
         function()
@@ -276,19 +261,6 @@ function TakeTurnState:victory()
 end
 
 function TakeTurnState:fadeOut()
-    print("Antes del FadeInState y de eliminar")
-    for index, state in ipairs(stateStack.states) do
-        print(index,state.classType)
-    end
-
-    -- while true do
-    --     if stateStack.states[#stateStack.states].classType ~= 'BattleState' then
-    --         stateStack:pop()
-    --     else
-    --         break
-    --     end
-    -- end
-
     if self.battleState.finalBoss then
 
         SOUNDS['victory']:stop()
@@ -320,18 +292,10 @@ function TakeTurnState:fadeOut()
             stateStack:pop() -- Si descomentó el while de arriba de esta función comente esta línea
             -- pop off the battle state
             stateStack:pop()
-            print("Antes del FadeOutState")
-            for index, state in ipairs(stateStack.states) do
-                print(index,state.classType)
-            end
+
             stateStack:push(FadeOutState({
                 r = 255, g = 255, b = 255
-            }, 1, function()
-                print("Despues del FadeOutState")
-                for index, state in ipairs(stateStack.states) do
-                    print(index,state.classType)
-                end
-            end))
+            }, 1, function() end))
         end))
     end
 end

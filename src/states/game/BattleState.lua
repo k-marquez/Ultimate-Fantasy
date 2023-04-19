@@ -69,7 +69,7 @@ function BattleState:init(party, region, onExit)
                 width = math.floor(c.width*1.5),
                 height = 3,
                 color = {r = 255, g = 10, b = 10},
-                value = c.elapsedRestTime,
+                value = 0,
                 max = c.restTime
             }
         end
@@ -124,7 +124,7 @@ function BattleState:createEnemies()
             baseMagic = enemyInfo.baseMagic,
             statusGenerated = enemyInfo.statusGenerated,
             animations = enemyInfo.animations,
-            restTime = math.random(2,10)
+            restTime = math.random(4,20)
         })
         enemy.stateMachine = StateMachine {
             ['battle'] = function() return EnemyBattleState(enemy) end
@@ -153,7 +153,7 @@ function BattleState:createEnemies()
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
                 animations = enemyInfo.animations,
-                restTime = math.random(4,10)
+                restTime = math.random(6,20)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end
@@ -185,7 +185,7 @@ function BattleState:createEnemies()
                 baseMagic = enemyInfo.baseMagic,
                 statusGenerated = enemyInfo.statusGenerated,
                 animations = enemyInfo.animations,
-                restTime = math.random(2,10)
+                restTime = math.random(4,15)
             })
             enemy.stateMachine = StateMachine {
                 ['battle'] = function() return EnemyBattleState(enemy) end
