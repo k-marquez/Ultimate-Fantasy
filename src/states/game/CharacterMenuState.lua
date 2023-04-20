@@ -12,6 +12,8 @@ CharacterMenuState = Class{__includes = BaseState}
 function CharacterMenuState:init(characters,i)
     self.classType = 'CharacterMenuState'
     self.entity = characters[i]
+    self.characters = characters
+    self.i = i
     local menuItems = {}
 
     for k, a in pairs(self.entity.actions) do
@@ -30,6 +32,7 @@ function CharacterMenuState:init(characters,i)
                     local targets = characters
 
                     if a.require_target then
+                        stateStack:pop()
                         -- Select target on targets with a
                         stateStack:push(SelectTargetState("Menu", targets,
                         -- callback for when a target has been selected
@@ -38,7 +41,6 @@ function CharacterMenuState:init(characters,i)
                             SOUNDS[a.sound_effect]:play()
                             stateStack:push(BattleMessageState("Menu", a.name .. ' for ' .. amount .. ' HP to ' .. selectedTarget.name .. '.',
                             function()               
-                                stateStack:pop()
                             end))
                         end))
                     else
@@ -138,6 +140,28 @@ function CharacterMenuState:init(characters,i)
 end
 
 function CharacterMenuState:update(dt)
+    if love.keyboard.wasPressed('s') then
+        local c = self.characters
+        local i = self.i
+        stateStack:pop()
+        if i < 4 then
+            i = i + 1
+        else
+            i = 1
+        end
+        stateStack:push(CharacterMenuState(c,i))
+    end
+    if love.keyboard.wasPressed('w') then
+        local c = self.characters
+        local i = self.i
+        stateStack:pop()
+        if i == 1 then
+            i = 4
+        else
+            i = i - 1
+        end
+        stateStack:push(CharacterMenuState(c,i))
+    end
     self.actionMenu:update(dt)
 end
 

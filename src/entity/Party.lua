@@ -142,5 +142,5 @@ function Party:render()
 end
 
 function Party:menu()
-    stateStack:push(CharacterMenuState(self.characters,3))
+    stateStack:push(CharacterMenuState(self.characters,1))
 end
